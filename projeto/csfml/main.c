@@ -13,13 +13,15 @@ void finalizar();
 
 void drawRect(sfColor cor, float x, float y);
 void drawText(const char * meutexto, float x, float y);
+void drawLetter(char letra, int x, int y);
+
 void playSound(const char * path);
 
 
 int main()
 {
     /* Create the main window */
-    iniciar(50, 24, 16);
+    iniciar(20, 24, 16);
 
     int posx = 0;
     int posy = 0;
@@ -52,8 +54,9 @@ int main()
         sfRenderWindow_clear(janela, sfBlack);
 
         /* Draw the text */
-        drawRect(sfWhite, posx, posy);
+        drawRect(sfRed, posx, posy);
         drawText("dog", posx, posy + 1);
+        drawLetter('x', posx, posy);
 
         /* Update the window */
         sfRenderWindow_display(janela);
@@ -107,6 +110,13 @@ void drawText(const char * meutexto, float x, float y){
     sfText_setCharacterSize(text, cell);
     sfText_setPosition(text, (sfVector2f){x * cell, y * cell});
     sfRenderWindow_drawText(janela, text, NULL);
+}
+
+void drawLetter(char letra, int x, int y){
+    char texto[2];
+    texto[0] = letra;
+    texto[1] = '\n';
+    drawText(texto, x + 0.25, y - 0.25);
 }
 
 void finalizar(){
